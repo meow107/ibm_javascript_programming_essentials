@@ -5,6 +5,7 @@ function addBook() {
     const authorName = document.getElementById('authorName').value;
     const bookDescription = document.getElementById('bookDescription').value;
     const pagesNumber = parseInt(document.getElementById('pagesNumber').value);
+
     if(bookName && authorName && bookDescription && !isNaN(pagesNumber)) {
         const book = {
             name: bookName,
@@ -22,8 +23,40 @@ function addBook() {
 }
 
 function showbooks() {
-    const bookDiv = books.map(
-
+    const bookDiv = books.map((book, index) => `<h1>book Number: ${index + 1}</h1>
+         <p><strong>Book Name: </strong>${book.name}</p>
+         <p><strong>Author Name:</strong>${book.authorName}</p>
+         <p><strong>Book Description:</strong>${book.bookDescription}</p>
+         <p><strong>No. of Pages:</strong>${book.pagesNumber} pages(s)</p>
+         <button onclick="editbook(${index})">Edit</button>
+         <button onlick="deletebook(${index})">Delete</button>`
+         
     );
     document.getElementById('books').innerHTML = bookDiv.join('');
 }
+
+function editbook(index) {
+    const book = books[index];
+    document.getElementById('bookName').value = book.name;
+    document.getElementById('authorName').value = book.authorName;
+    document.getElementById('bookDescription').value = book.bookDescription;
+    document.getElementById('pagesNumber').value = book.pagesNumber;
+    books.splice(index, 1);
+    showbooks();
+}
+
+function deletebook(index) {
+    // Remove the book entry at the given index
+    books.splice(index, 1);
+    showbooks(); // Referesh the book list after deletion
+}
+
+function clearInputs() {
+    document.getElementById('bookName').value = '';
+    document.getElementById('authorName').value = '';
+    document.getElementById('bookDescription').value = '';
+    document.getElementById('pagesNumber').value = '';
+}
+
+
+
