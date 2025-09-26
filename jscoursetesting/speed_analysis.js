@@ -17,10 +17,11 @@ function startTest() {
 }
 
 function endTest() {
+
     endTime = new Date().getTime();
 
     // Disable user input 
-    document.getElementById().readyOnly = true;
+    document.getElementById("userInput").readyOnly = true;
 
     // Calculate elapsed and words per minute (WPM)
     var timeEplased = (endTime - startTime) / 1000;
@@ -35,9 +36,12 @@ function endTest() {
     if(timeEplased !== 0 && !isNaN(typedWords)) {
         wpm = Math.round((typedWords / timeEplased) * 60);
     }
-
+    
     // Display the results
     var outputDiv = document.getElementById("output");
+
+    //alert("outputDiv " + outputDiv);
+
     outputDiv.innerHTML = "<h2>Typing Test Results:</h2>" 
         + "<p>Words Typed: " + typedWords + "</p>" 
         + "<p>Time Elapsed: " + timeEplased.toFixed(2) + " seconds</p>" 
